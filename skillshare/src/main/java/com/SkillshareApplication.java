@@ -1,4 +1,4 @@
-package com.skillshare.skillshare;
+package com;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,4 +10,7 @@ public class SkillshareApplication {
 		SpringApplication.run(SkillshareApplication.class, args);
 	}
 
+    public static void main(String[] args) {
+        SpringApplication.run(SkillshareApplication.class, args); 
+    }
 }
