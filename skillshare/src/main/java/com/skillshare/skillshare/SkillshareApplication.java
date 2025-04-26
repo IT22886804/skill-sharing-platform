@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SkillshareApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SkillshareApplication.class, args);
+		SpringApplication.run(SkillshareApplication.class, args);
 	}
 
 }
