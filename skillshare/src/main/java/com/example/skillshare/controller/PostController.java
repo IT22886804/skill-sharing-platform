@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.skillshare.model.Post;
 import com.example.skillshare.service.PostService;
 import com.example.skillshare.model.Comment;
+import com.example.skillshare.model.Like;
 // PostController.java
 @RestController
 @RequestMapping("/api/posts")
@@ -95,5 +96,17 @@ public class PostController {
         Post updatedPost = postService.deleteComment(postId, commentId, userId);
         return new ResponseEntity<>(updatedPost, HttpStatus.OK);
     }
+ // Add a like to a post
+ @PostMapping("/{postId}/likes")
+ public ResponseEntity<Post> addLike(@PathVariable String postId, @RequestBody Like like) {
+     Post updatedPost = postService.addLike(postId, like);
+     return new ResponseEntity<>(updatedPost, HttpStatus.CREATED);
+ }
 
+ // Remove a like from a post
+ @DeleteMapping("/{postId}/likes/{userId}")
+ public ResponseEntity<Post> removeLike(@PathVariable String postId, @PathVariable String userId) {
+     Post updatedPost = postService.removeLike(postId, userId);
+     return new ResponseEntity<>(updatedPost, HttpStatus.OK);
+ }
 }

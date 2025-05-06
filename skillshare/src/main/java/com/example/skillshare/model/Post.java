@@ -22,6 +22,7 @@ public class Post {
     private Date createdAt;
     private Date updatedAt;
     private List<Comment> comments;
+    private List<Like> likes;
 
     public String getId() {
         return id;
@@ -84,6 +85,14 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
     }
 
 }
