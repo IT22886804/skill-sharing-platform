@@ -10,6 +10,22 @@ import {
 //main app pages
 import SkillSharingFeed from "./Pages/SkillSharingFeed.jsx";
 
+//auth Context
+import { useAuth } from "./context/auth/useAuth.js";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import MainLayout from "./layout/MainLayout.jsx";
+
+//scrollToTop component to reset scroll position on navigation
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   const { currentUser } = useAuth(); 
 
