@@ -15,8 +15,7 @@ import CreatePostForm from "../components/CreateSkillPostModal";
 // import Comment, { CommentForm } from "../components/CommentComponent";
 import EditPostModal from "../components/EditSkillPostModal";
 import ConfirmModal from "../components/ConfirmModal";
-import EditPostModal from "./EditPostModal";
-import ConfirmModal from "./ConfirmModal";
+
 
 import { Link } from "react-router-dom";
 

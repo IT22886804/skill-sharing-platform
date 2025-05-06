@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 //main app pages
-import SkillSharingFeed from "./components/CreateSkillPostModal.jsx";
+import SkillSharingFeed from "./Pages/SkillSharingFeed.jsx";
 
 function App() {
   const { currentUser } = useAuth(); 
@@ -40,6 +40,8 @@ function App() {
     </Router>
   );
 }
+
+export default App;
 
 // function App() {
 //   const [count, setCount] = useState(0)
