@@ -11,7 +11,7 @@ import {
 import SkillSharingFeed from "./components/CreateSkillPostModal.jsx";
 
 function App() {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuth(); 
 
   return (
     <Router>
