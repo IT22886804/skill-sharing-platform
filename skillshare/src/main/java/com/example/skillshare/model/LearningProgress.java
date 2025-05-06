@@ -1,6 +1,7 @@
 package com.example.skillshare.model;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "learning_progress")
-@AllArgsConstructor
-@NoArgsConstructor
+// @AllArgsConstructor
+// @NoArgsConstructor
 public class LearningProgress {
     @Id
     private String id;
@@ -158,3 +159,4 @@ public class LearningProgress {
     //     this.comments = comments;
     // }
 }
+    // } 
