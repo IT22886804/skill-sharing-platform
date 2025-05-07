@@ -21,6 +21,8 @@ public class Post {
     private List<String> mediaUrls;
     private Date createdAt;
     private Date updatedAt;
+    private List<Comment> comments;
+    private List<Like> likes;
 
     public String getId() {
         return id;
@@ -76,6 +78,21 @@ public class Post {
 
     public void setUpdatedAt(java.util.Date updatedAt) {
         this.updatedAt = (Date) updatedAt;
+    }
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
     }
 
 }

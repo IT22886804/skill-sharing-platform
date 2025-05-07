@@ -1,15 +1,19 @@
 package com.example.skillshare.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List; 
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.skillshare.model.Post;
 import com.example.skillshare.repository.PostRepository;
-
+import com.example.skillshare.model.Comment;
+import com.example.skillshare.model.Like;
 
 @Service
 public class PostService {
@@ -59,4 +63,68 @@ public class PostService {
         postRepository.delete(post);
     }
 
+    public Post addComment(String postId, Comment comment) {
+        Post post = getPostById(postId);
+        if (post.getComments() == null) {
+            post.setComments(new ArrayList<>());
+        }
+        if (comment.getUserName() == null || comment.getUserName().isEmpty()) {
+            comment.setUserName("Unknown User");
+        }
+        comment.setId(UUID.randomUUID().toString());
+        comment.setCreatedAt(new Date());
+        comment.setUpdatedAt(new Date());
+        post.getComments().add(comment);
+        post = postRepository.save(post);
+        //trigger notification if commenter is not the post owner
+        
+        return post;
+    }
+
+    public Post updateComment(String postId, String commentId, Comment commentDetails) {
+        Post post = getPostById(postId);
+        post.getComments().stream()
+                .filter(c -> c.getId().equals(commentId))
+                .findFirst()
+                .ifPresent(c -> {
+                    c.setContent(commentDetails.getContent());
+                    c.setUpdatedAt(new Date());
+                });
+        return postRepository.save(post);
+    }
+
+    public Post deleteComment(String postId, String commentId, String userId) {
+        Post post = getPostById(postId);
+        boolean isPostOwner = post.getUserId().equals(userId);
+        post.setComments(post.getComments().stream()
+                .filter(c -> !(c.getId().equals(commentId) && (c.getUserId().equals(userId) || isPostOwner)))
+                .collect(Collectors.toList()));
+        return postRepository.save(post);
+    }
+
+    public Post addLike(String postId, Like like) {
+        Post post = getPostById(postId);
+        if (post.getLikes() == null) {
+            post.setLikes(new ArrayList<>());
+        }
+        boolean alreadyLiked = post.getLikes().stream()
+                .anyMatch(l -> l.getUserId().equals(like.getUserId()));
+
+        if (!alreadyLiked) {
+            like.setCreatedAt(new Date());
+            post.getLikes().add(like);
+            post = postRepository.save(post);
+            // Trigger notification if liker is not the post owner
+           
+        }
+        return post;
+    }
+
+    public Post removeLike(String postId, String userId) {
+        Post post = getPostById(postId);
+        post.setLikes(post.getLikes().stream()
+                .filter(like -> !like.getUserId().equals(userId))
+                .collect(Collectors.toList()));
+        return postRepository.save(post);
+    }
 }
