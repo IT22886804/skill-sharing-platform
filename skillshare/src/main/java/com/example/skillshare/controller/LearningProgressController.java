@@ -2,8 +2,6 @@ package com.example.skillshare.controller;
 
 // import com.example.skillshare.model.Comment;
 // import com.example.skillshare.model.Like;
-//import com.example.skillshare.model.Comment;
-//import com.example.skillshare.model.Like;
 import com.example.skillshare.model.LearningProgress;
 import com.example.skillshare.service.LearningProgressService;
 
@@ -69,8 +67,6 @@ public class LearningProgressController {
     }
 
     //ad a comment to a learning progress entry
-
-    // //ad a comment to a learning progress entry
     // @PostMapping("/{entryId}/comments")
     // public ResponseEntity<LearningProgress> addComment(
     //         @PathVariable String entryId,
@@ -80,7 +76,6 @@ public class LearningProgressController {
     // }
 
     //update a comment
-    // //update a comment
     // @PutMapping("/{entryId}/comments/{commentId}")
     // public ResponseEntity<LearningProgress> updateComment(
     //         @PathVariable String entryId,
@@ -101,17 +96,6 @@ public class LearningProgressController {
     // }
 
     //ad a like to a learning progress entry
-
-    // @DeleteMapping("/{entryId}/comments/{commentId}")
-    // public ResponseEntity<LearningProgress> deleteComment(
-    //         @PathVariable String entryId,
-    //         @PathVariable String commentId,
-    //         @RequestParam String userId) {
-    //     LearningProgress updated = learningProgressService.deleteComment(entryId, commentId, userId);
-    //     return new ResponseEntity<>(updated, HttpStatus.OK);
-    // }
-
-    // //ad a like to a learning progress entry
     // @PostMapping("/{entryId}/likes")
     // public ResponseEntity<LearningProgress> addLike(
     //         @PathVariable String entryId,
@@ -121,13 +105,6 @@ public class LearningProgressController {
     // }
 
     //rremove a like from a learning progress entry
-    // @DeleteMapping("/{entryId}/likes/{userId}")
-    // public ResponseEntity<LearningProgress> removeLike(
-    //         @PathVariable String entryId,
-    //         @PathVariable String userId) {
-    //     LearningProgress updated = learningProgressService.removeLike(entryId, userId);
-    //     return new ResponseEntity<>(updated, HttpStatus.OK);
-    // }
     // @DeleteMapping("/{entryId}/likes/{userId}")
     // public ResponseEntity<LearningProgress> removeLike(
     //         @PathVariable String entryId,

@@ -1,7 +1,6 @@
 package com.example.skillshare.repository;
 
 
-
 import com.example.skillshare.model.LearningProgress;
 import com.example.skillshare.model.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;
