@@ -2,6 +2,8 @@ package com.example.skillshare.controller;
 
 import com.example.skillshare.model.LearningPlan;
 import com.example.skillshare.service.LearningPlanService;
+import com.example.skillshare.model.Comment;
+import com.example.skillshare.model.Like;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,11 +69,22 @@ public class LearningPlanController {
 
     // Add a comment to a learning plan
     @PostMapping("/{planId}/comments")
-    
+    public ResponseEntity<LearningPlan> addComment(
+        @PathVariable String planId,
+        @RequestBody Comment comment) {
+    LearningPlan updated = learningPlanService.addComment(planId, comment);
+    return new ResponseEntity<>(updated, HttpStatus.CREATED);
+}
 
     // Update a comment
     @PutMapping("/{planId}/comments/{commentId}")
-    
+    public ResponseEntity<LearningPlan> updateComment(
+        @PathVariable String planId,
+        @PathVariable String commentId,
+        @RequestBody Comment comment) {
+    LearningPlan updated = learningPlanService.updateComment(planId, commentId, comment);
+    return new ResponseEntity<>(updated, HttpStatus.OK);
+}
 
     // Delete a comment
     @DeleteMapping("/{planId}/comments/{commentId}")
@@ -85,7 +98,12 @@ public class LearningPlanController {
 
     // Add a like to a learning plan
     @PostMapping("/{planId}/likes")
-    
+    public ResponseEntity<LearningPlan> addLike(
+            @PathVariable String planId,
+            @RequestBody Like like) {
+        LearningPlan updated = learningPlanService.addLike(planId, like);
+        return new ResponseEntity<>(updated, HttpStatus.CREATED);
+    }
 
     // Remove a like from a learning plan
     @DeleteMapping("/{planId}/likes/{userId}")

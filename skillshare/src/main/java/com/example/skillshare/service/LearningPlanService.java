@@ -2,12 +2,16 @@ package com.example.skillshare.service;
 
 import com.example.skillshare.model.LearningPlan;
 import com.example.skillshare.repository.LearningPlanRepository;
+import com.example.skillshare.model.Comment;
+import com.example.skillshare.model.Like;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 // import java.util.stream.Collectors;
+import java.util.stream.Collectors;
 
 @Service
 public class LearningPlanService {
@@ -25,6 +29,8 @@ public class LearningPlanService {
         }
         plan.setCreatedAt(new Date());
         plan.setUpdatedAt(new Date());
+        plan.setLikes(new ArrayList<>());
+        plan.setComments(new ArrayList<>());
         return learningPlanRepository.save(plan);
     }
 
@@ -62,33 +68,68 @@ public class LearningPlanService {
     }
 
     // Add comment
-    public LearningPlan addComment(String planId) {
+    public LearningPlan addComment(String planId, Comment comment) {
         LearningPlan plan = getLearningPlanById(planId);
+        if (plan.getComments() == null) {
+            plan.setComments(new ArrayList<>());
+        }
+        if (comment.getUserName() == null || comment.getUserName().isEmpty()) {
+            comment.setUserName("Unknown User");
+        }
+        comment.setId(UUID.randomUUID().toString());
+        comment.setCreatedAt(new Date());
+        comment.setUpdatedAt(new Date());
+        plan.getComments().add(comment);
         return learningPlanRepository.save(plan);
     }
 
+
     // Update comment
-    public LearningPlan updateComment(String planId, String commentId) {
+    public LearningPlan updateComment(String planId, String commentId, Comment commentDetails) {
         LearningPlan plan = getLearningPlanById(planId);
+        plan.getComments().stream()
+                .filter(c -> c.getId().equals(commentId))
+                .findFirst()
+                .ifPresent(c -> {
+                    c.setContent(commentDetails.getContent());
+                    c.setUpdatedAt(new Date());
+                });
         return learningPlanRepository.save(plan);
     }
 
     // Delete comment
-    public LearningPlan deleteComment(String planId, String commentId, String userId) {
+     public LearningPlan deleteComment(String planId, String commentId, String userId) {
         LearningPlan plan = getLearningPlanById(planId);
         boolean isOwner = plan.getUserId().equals(userId);
+        plan.setComments(plan.getComments().stream()
+                .filter(c -> !(c.getId().equals(commentId) && (c.getUserId().equals(userId) || isOwner)))
+                .collect(Collectors.toList()));
         return learningPlanRepository.save(plan);
     }
 
     // Add like
-    public LearningPlan addLike(String planId) {
+    public LearningPlan addLike(String planId, Like like) {
         LearningPlan plan = getLearningPlanById(planId);
+        if (plan.getLikes() == null) {
+            plan.setLikes(new ArrayList<>());
+        }
+        boolean alreadyLiked = plan.getLikes().stream()
+                .anyMatch(l -> l.getUserId().equals(like.getUserId()));
+
+        if (!alreadyLiked) {
+            like.setCreatedAt(new Date());
+            plan.getLikes().add(like);
+            return learningPlanRepository.save(plan);
+        }
         return plan;
     }
 
     // Remove like
     public LearningPlan removeLike(String planId, String userId) {
         LearningPlan plan = getLearningPlanById(planId);
+        plan.setLikes(plan.getLikes().stream()
+                .filter(like -> !like.getUserId().equals(userId))
+                .collect(Collectors.toList()));
         return learningPlanRepository.save(plan);
     }
 }
