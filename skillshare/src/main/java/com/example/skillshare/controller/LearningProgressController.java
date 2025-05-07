@@ -65,51 +65,7 @@ public class LearningProgressController {
         learningProgressService.deleteLearningProgress(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+   
 
-    // //ad a comment to a learning progress entry
-    // @PostMapping("/{entryId}/comments")
-    // public ResponseEntity<LearningProgress> addComment(
-    //         @PathVariable String entryId,
-    //         @RequestBody Comment comment) {
-    //     LearningProgress updated = learningProgressService.addComment(entryId, comment);
-    //     return new ResponseEntity<>(updated, HttpStatus.CREATED);
-    // }
-
-    // //update a comment
-    // @PutMapping("/{entryId}/comments/{commentId}")
-    // public ResponseEntity<LearningProgress> updateComment(
-    //         @PathVariable String entryId,
-    //         @PathVariable String commentId,
-    //         @RequestBody Comment comment) {
-    //     LearningProgress updated = learningProgressService.updateComment(entryId, commentId, comment);
-    //     return new ResponseEntity<>(updated, HttpStatus.OK);
-    // }
-
-    //delete a comment
-    @DeleteMapping("/{entryId}/comments/{commentId}")
-    public ResponseEntity<LearningProgress> deleteComment(
-            @PathVariable String entryId,
-            @PathVariable String commentId,
-            @RequestParam String userId) {
-        LearningProgress updated = learningProgressService.deleteComment(entryId, commentId, userId);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
-    }
-
-    // //ad a like to a learning progress entry
-    // @PostMapping("/{entryId}/likes")
-    // public ResponseEntity<LearningProgress> addLike(
-    //         @PathVariable String entryId,
-    //         @RequestBody Like like) {
-    //     LearningProgress updated = learningProgressService.addLike(entryId, like);
-    //     return new ResponseEntity<>(updated, HttpStatus.CREATED);
-    // }
-
-    //rremove a like from a learning progress entry
-    @DeleteMapping("/{entryId}/likes/{userId}")
-    public ResponseEntity<LearningProgress> removeLike(
-            @PathVariable String entryId,
-            @PathVariable String userId) {
-        LearningProgress updated = learningProgressService.removeLike(entryId, userId);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
-    }
+   
 }
