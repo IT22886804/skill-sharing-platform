@@ -19,6 +19,8 @@ public class LearningPlan {
     private String resources;
     private Date createdAt;
     private Date updatedAt;
+    private List<Like> likes;
+    private List<Comment> comments;
 
     // Getters, setters, constructors
     public LearningPlan() {
@@ -107,6 +109,22 @@ public class LearningPlan {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
 
