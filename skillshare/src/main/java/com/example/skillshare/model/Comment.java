@@ -1,27 +1,20 @@
 package com.example.skillshare.model;
 
-
-import java.util.Date;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document; 
 
-@Document(collection = "posts")
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
-    @Id
+public class Comment {
+    
     private String id;
     private String userId;
     private String userName;
-    private String description;
-    private List<String> mediaUrls;
+    private String content;
     private Date createdAt;
     private Date updatedAt;
-    private List<Comment> comments;
 
     public String getId() {
         return id;
@@ -47,28 +40,20 @@ public class Post {
         this.userName = userName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<String> getMediaUrls() {
-        return mediaUrls;
-    }
-
-    public void setMediaUrls(List<String> mediaUrls) {
-        this.mediaUrls = mediaUrls;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(java.util.Date createdAt) {
+        this.createdAt = (Date) createdAt;
     }
 
     public Date getUpdatedAt() {
@@ -78,12 +63,5 @@ public class Post {
     public void setUpdatedAt(java.util.Date updatedAt) {
         this.updatedAt = (Date) updatedAt;
     }
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
 }
+
