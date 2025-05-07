@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.example.skillshare.model.Post;
 import com.example.skillshare.repository.PostRepository;
 import com.example.skillshare.model.Comment;
+import com.example.skillshare.model.Like;
 
 @Service
 public class PostService {
@@ -97,6 +98,32 @@ public class PostService {
         boolean isPostOwner = post.getUserId().equals(userId);
         post.setComments(post.getComments().stream()
                 .filter(c -> !(c.getId().equals(commentId) && (c.getUserId().equals(userId) || isPostOwner)))
+                .collect(Collectors.toList()));
+        return postRepository.save(post);
+    }
+
+    public Post addLike(String postId, Like like) {
+        Post post = getPostById(postId);
+        if (post.getLikes() == null) {
+            post.setLikes(new ArrayList<>());
+        }
+        boolean alreadyLiked = post.getLikes().stream()
+                .anyMatch(l -> l.getUserId().equals(like.getUserId()));
+
+        if (!alreadyLiked) {
+            like.setCreatedAt(new Date());
+            post.getLikes().add(like);
+            post = postRepository.save(post);
+            // Trigger notification if liker is not the post owner
+           
+        }
+        return post;
+    }
+
+    public Post removeLike(String postId, String userId) {
+        Post post = getPostById(postId);
+        post.setLikes(post.getLikes().stream()
+                .filter(like -> !like.getUserId().equals(userId))
                 .collect(Collectors.toList()));
         return postRepository.save(post);
     }
