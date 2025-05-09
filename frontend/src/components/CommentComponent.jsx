@@ -6,15 +6,15 @@ import { deleteComment, updateComment } from "../api/skillSharingAPI";
 import toast from "react-hot-toast";
 import useConfirmModal from "../hooks/useConfirmModal";
 import ConfirmModal from "./ConfirmModal";
-import {
-  deleteLearningProgressComment,
-  updateLearningProgressComment,
-} from "../api/learningProgressAPI";
-import {
-  deleteLearningPlanComment,
-  updateLearningPlanComment,
-} from "../api/learningPlanAPI";
-import UserAvatar from "./UserAvatar";
+// import {
+//   deleteLearningProgressComment,
+//   updateLearningProgressComment,
+// } from "../api/learningProgressAPI";
+// import {
+//   deleteLearningPlanComment,
+//   updateLearningPlanComment,
+// } from "../api/learningPlanAPI";
+// import UserAvatar from "./UserAvatar";
 
 export const CommentForm = ({ postId, onAddComment, currentUser }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
