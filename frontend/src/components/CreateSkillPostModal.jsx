@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { createPost } from "../api/skillSharingAPI";
-
+import { useAuth } from "../context/auth";
 import toast from "react-hot-toast";
 
 const CreatePostForm = ({ onPostCreated }) => {
