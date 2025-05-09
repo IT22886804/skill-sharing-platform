@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Edit, Trash, Book, Link } from "lucide-react";
+import Comment, { CommentForm } from "./CommentComponent";
 import useConfirmModal from "../hooks/useConfirmModal";
 import ConfirmModal from "./ConfirmModal";
 import UserAvatar from "./UserAvatar";
@@ -10,10 +11,13 @@ const LearningPlanCard = ({
   plan,
   currentUser,
   onLike,
+   onComment,
+  onDeleteComment,
+  onUpdateComment,
   onEdit,
   onDelete,
   token,
-}) => {
+}) => { const [showComments, setShowComments] = useState(false);
   const { modalState, openModal, closeModal } = useConfirmModal();
 
   const isLikedByUser = plan.likes?.some(
@@ -188,6 +192,37 @@ const LearningPlanCard = ({
       </div>
 
       {/* Comments Section */}
+      {showComments && (
+        <div className="p-4 bg-white bg-opacity-20">
+          {/* Add Comment Form */}
+          <CommentForm
+            postId={plan.id}
+            onAddComment={handleAddComment}
+            currentUser={currentUser}
+          />
+
+          {/* Comments List */}
+          <div className="space-y-3 max-h-64 overflow-y-auto mt-4">
+            {plan.comments && plan.comments.length > 0 ? (
+              plan.comments.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  comment={comment}
+                  postId={plan.id}
+                  currentUser={currentUser}
+                  postUserId={plan.userId}
+                  onCommentUpdated={onUpdateComment}
+                  onCommentDeleted={onDeleteComment}
+                  token={token}
+                  commentType="LEARNING_PLANS"
+                />
+              ))
+            ) : (
+              <p className="text-center text-gray-500 py-3">No comments yet</p>
+            )}
+          </div>
+        </div>
+      )}
       
 
       {/* Confirmation Modal */}
