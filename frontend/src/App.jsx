@@ -7,7 +7,8 @@ import {
   useLocation,
 } from "react-router-dom";
 
-//main app pages
+
+//main App Pages
 import SkillSharingFeed from "./Pages/SkillSharingFeed.jsx";
 
 //auth Context
@@ -27,13 +28,14 @@ const ScrollToTop = () => {
 };
 
 function App() {
-  const { currentUser } = useAuth(); 
+  const { currentUser } = useAuth();
 
   return (
     <Router>
       <ScrollToTop />
       <Routes>
         {/* auth Routes */}
+        <Route path="/oauth-success" element={<OAuthSuccessPage />} />
 
         {/* protected Routes */}
         <Route element={<ProtectedRoute />}>
@@ -46,8 +48,6 @@ function App() {
               </MainLayout>
             }
           />
-
-
         </Route>
 
         {/* fallback - redirect to home */}
