@@ -14,6 +14,9 @@ import OAuthSuccessPage from "./Pages/OAuthSuccessPage.jsx";
 
 //main App Pages
 import SkillSharingFeed from "./Pages/SkillSharingFeed.jsx";
+import LearningProgressPage from "./Pages/LearningProgressPage.jsx";
+import LearningPlanPage from "./Pages/LearningPlanPage.jsx";
+import ProfilePage from "./Pages/ProfilePage.jsx";
 
 //auth Context
 import { useAuth } from "./context/auth/useAuth.js";
@@ -60,6 +63,23 @@ function App() {
               </MainLayout>
             }
           />
+          <Route
+            path="/progress"
+            element={
+              <MainLayout activeTab="progress">
+                <LearningProgressPage />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/plans"
+            element={
+              <MainLayout activeTab="plans">
+                <LearningPlanPage />
+              </MainLayout>
+            }
+          />
+          <Route path="/profile/:userId" element={<ProfilePage />} />
         </Route>
 
         {/* fallback - redirect to home */}
